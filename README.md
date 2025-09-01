@@ -12,3 +12,4 @@ original log group will be maintained but unused.
 Supported version of Serverless Framework:
 
  * 1.70.0+
+ * 2.0.0+
