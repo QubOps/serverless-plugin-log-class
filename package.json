@@ -1,0 +1,13 @@
+{
+	"name": "serverless-plugin-log-class",
+	"version": "1.0.0",
+	"description": "Serverless Framework plugin to set S3 log class",
+	"main": "index.js",
+	"peerDependencies": {
+		"serverless": ">=1.70.0 <2.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/qub10/serverless-plugin-log-class.git"
+	}
+}

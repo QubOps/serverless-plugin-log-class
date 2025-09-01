@@ -1,0 +1,14 @@
+service: iatest
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  logRetentionInDays: 7
+
+plugins:
+  - serverless-plugin-infrequent-access-logs
+
+functions:
+  hello:
+    handler: hello.handler
