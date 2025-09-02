@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
-    "serverless": ">=1.70.0 <4.0"
+    "serverless": ">=1.70.0"
   },
   "engines": {
     "node": ">=14"
