@@ -80,6 +80,6 @@ custom:
 ```
 
 [ico-license]: https://img.shields.io/badge/license-MIT-blue.svg
-[ico-serverless]: https://raw.githubusercontent.com/serverless/artwork/1701ae94377700fde0496890d26a6851720a4f9a/logo-serverless-transparent.png
+[ico-serverless]: https://s3-us-west-2.amazonaws.com/assets.blog.serverless.com/v3-badge.svg
 [link-serverless]: https://www.serverless.com/
 [link-license]: ./blob/main/LICENSE
