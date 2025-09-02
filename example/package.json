@@ -1,13 +1,13 @@
 {
-	"scripts": {
-		"deploy": "serverless deploy --force",
-		"remove": "serverless remove"
-	},
-	"devDependencies": {
-		"serverless": "^3.15.2",
-		"serverless-plugin-log-class": "file:///home/jamie/Development/qub10/serverless-plugin-log-class"
-	},
-	"engines": {
-		"node": ">=18 <20"
-	}
+  "scripts": {
+    "deploy": "serverless deploy --force",
+    "remove": "serverless remove"
+  },
+  "devDependencies": {
+    "serverless": "^3.15.2",
+    "serverless-plugin-log-class": "file:///home/jamie/Development/qub10/serverless-plugin-log-class"
+  },
+  "engines": {
+    "node": ">=18 <20"
+  }
 }
