@@ -62,7 +62,7 @@ The plugin will create a new log group for the specified log class. The original
 log group will remain but unused.
 
 If you would like to remove the original log group, which would mean losing any
-exitsing logs, you can set the following option:
+existing logs, you can set the following option:
 
 ```yaml
 custom:
@@ -78,6 +78,10 @@ custom:
     preserveDefaultLogGroup: false # default: true
     logGroupNameSuffix: '' # Removes the -ia suffix
 ```
+
+Please note: if you decide to remove the suffix, but then want to re-enable the
+default log group, you will first need to re-add the suffix and deploy to avoid
+a name clash before setting `preserveDefaultLogGroup` to `true`.
 
 [ico-license]: https://img.shields.io/badge/license-MIT-blue.svg
 [ico-serverless]: https://s3-us-west-2.amazonaws.com/assets.blog.serverless.com/v3-badge.svg
