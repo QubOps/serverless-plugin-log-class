@@ -17,7 +17,8 @@ custom:
     logClass: INFREQUENT_ACCESS
     # Optional, will mean removing original log group and it's logs
     # preserveLogGroup: false # default: true
-    # Optional, will remove the suffix and go back to default log group name
+    # Optional, will remove the suffix resulting in the default log group name.
+    # Changing this will cause log group recreation and loss of logs.
     # logGroupNameSuffix: ''
 
 functions:
@@ -26,3 +27,4 @@ functions:
     logRetentionInDays: 14
     # Can be overridden at function level too
     # logClass: STANDARD
+    # logGroupNameSuffix: ''
