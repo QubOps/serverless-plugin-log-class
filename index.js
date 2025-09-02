@@ -24,7 +24,7 @@ class InfrequentLogsPlugin {
       type: 'object',
       properties: {
         logClass: { type: 'string' },
-        preserveLogGroup: { type: 'boolean' },
+        preserveDefaultLogGroup: { type: 'boolean' },
         logGroupNameSuffix: { type: 'string' },
       },
       additionalProperties: false,
@@ -52,7 +52,7 @@ class InfrequentLogsPlugin {
 
     this.serverless.configSchemaHandler.defineFunctionProperties("aws", {
       properties: {
-        preserveLogGroup: { type: 'boolean' },
+        preserveDefaultLogGroup: { type: 'boolean' },
       }
     });
 
@@ -72,6 +72,7 @@ class InfrequentLogsPlugin {
       const functionConfig = functionObject.logClassPlugin || {};
 
       const functionLogClass = (functionConfig.logClass || this.pluginConfig.logClass || 'STANDARD').toUpperCase();
+      const preserveLogGroup = functionConfig.preserveDefaultLogGroup ?? this.pluginConfig.preserveDefaultLogGroup ?? true;
       
       // Use default log groups for STANDARD log class
       if (functionLogClass === 'STANDARD') {
@@ -85,9 +86,18 @@ class InfrequentLogsPlugin {
         console.warn(`Lambda function ${lambdaLogicalId} not found in CloudFormation template`);
         return;
       }
+
+      lambdaObject.DependsOn = lambdaObject.DependsOn || [];
       
-      // Create a new LogGroup logical id to retain any standard logs groups
-      const logGroupLogicalId = `${this.getNormalizedFunctionName(functionName)}LogGroupCustom`;
+      let logGroupLogicalId = `${this.getNormalizedFunctionName(functionName)}LogGroup`;
+
+      if (!preserveLogGroup) {
+        delete cf.Resources[logGroupLogicalId];
+        lambdaObject.DependsOn = lambdaObject.DependsOn.filter(v => v !== logGroupLogicalId);
+      }
+
+      logGroupLogicalId += 'Custom';
+
       const logGroupName = this.getFunctionLogGroupName(functionName, functionLogClass);
 
       cf.Resources[logGroupLogicalId] = {
@@ -107,7 +117,6 @@ class InfrequentLogsPlugin {
       lambdaObject.Properties.LoggingConfig = lambdaObject.Properties.LoggingConfig || {};
       lambdaObject.Properties.LoggingConfig.LogGroup = { Ref: logGroupLogicalId };
 
-      lambdaObject.DependsOn = lambdaObject.DependsOn || [];
       if (Array.isArray(lambdaObject.DependsOn)) {
         lambdaObject.DependsOn.push(logGroupLogicalId);
       } else {
@@ -132,11 +141,20 @@ class InfrequentLogsPlugin {
   getFunctionLogGroupName(functionName, logClass) {
     const stage = this.options.stage || this.serverless.service.provider.stage;
     const service = this.serverless.service.service;
+
+    const functionConfig = this.serverless.service.functions[functionName].logClassPlugin || {};
+    const pluginConfig = this.pluginConfig || {};
+
     const suffixMap = {
       STANDARD: '',
       INFREQUENT_ACCESS: '-ia',
     }
-    const suffix = suffixMap[logClass] || '-custom';
+
+    const suffix = functionConfig.logGroupNameSuffix ??
+      pluginConfig.logGroupNameSuffix ??
+      suffixMap[logClass] ??
+      '-custom';
+
     return `/aws/lambda/${service}-${stage}-${functionName}${suffix}`;
   }
 
