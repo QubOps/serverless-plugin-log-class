@@ -7,9 +7,45 @@ class InfrequentLogsPlugin {
     this.pluginConfig = this.custom.logClassPlugin || {};
     this.pluginConfig.logClass = (this.pluginConfig.logClass || 'STANDARD').toUpperCase();
 
+    this.addCustomConfig();
+
     this.hooks = {
       'before:deploy:deploy': this.addCustomLogClass.bind(this),
     };
+  }
+
+  addCustomConfig() {
+    // Custom schema validation only supported from v3 and above
+    if (!this.serverless.configSchemaHandler) {
+      return;
+    }
+
+    this.serverless.configSchemaHandler.defineCustomProperties({
+      type: 'object',
+      properties: {
+        logClass: { type: 'string' },
+        preserveLogGroup: { type: 'boolean' },
+        logGroupNameSuffix: { type: 'string' },
+      },
+    });
+
+    this.serverless.configSchemaHandler.defineFunctionProperties("aws", {
+      properties: {
+        logClass: { type: 'string' },
+      }
+    });
+
+    this.serverless.configSchemaHandler.defineFunctionProperties("aws", {
+      properties: {
+        preserveLogGroup: { type: 'boolean' },
+      }
+    });
+
+    this.serverless.configSchemaHandler.defineFunctionProperties("aws", {
+      properties: {
+        logGroupNameSuffix: { type: 'string' },
+      }
+    });
   }
 
   addCustomLogClass() {
