@@ -1,4 +1,4 @@
-class InfrequentLogsPlugin {
+class LogClassPlugin {
   constructor(serverless, options) {
     this.serverless = serverless;
     this.options = options;
@@ -217,4 +217,4 @@ class InfrequentLogsPlugin {
   }
 }
 
-module.exports = InfrequentLogsPlugin;
+module.exports = LogClassPlugin;
