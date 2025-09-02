@@ -6,6 +6,9 @@
 	"peerDependencies": {
 		"serverless": ">=1.70.0 <4.0"
 	},
+	"engines": {
+		"node": ">=14"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/qub10/serverless-plugin-log-class.git"
