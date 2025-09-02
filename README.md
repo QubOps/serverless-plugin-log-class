@@ -1,5 +1,8 @@
 # serverless-plugin-log-class
 
+[![Serverless][ico-serverless]][link-serverless]
+[![License][ico-license]][link-license]
+
 ## Summary
 
 Serverless Framework plugin to specify a custom log class for AWS Lambda
@@ -75,3 +78,8 @@ custom:
     preserveDefaultLogGroup: false # default: true
     logGroupNameSuffix: '' # Removes the -ia suffix
 ```
+
+[ico-license]: https://img.shields.io/badge/license-MIT-blue.svg
+[ico-serverless]: https://raw.githubusercontent.com/serverless/artwork/1701ae94377700fde0496890d26a6851720a4f9a/logo-serverless-transparent.png
+[link-serverless]: https://www.serverless.com/
+[link-license]: ./blob/main/LICENSE
