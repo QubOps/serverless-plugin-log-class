@@ -20,12 +20,27 @@ class InfrequentLogsPlugin {
       return;
     }
 
-    this.serverless.configSchemaHandler.defineCustomProperties({
+    const pluginConfigSchema = {
       type: 'object',
       properties: {
         logClass: { type: 'string' },
         preserveLogGroup: { type: 'boolean' },
         logGroupNameSuffix: { type: 'string' },
+      },
+      additionalProperties: false,
+    };
+
+    this.serverless.configSchemaHandler.defineCustomProperties({
+      type: 'object',
+      properties: {
+        logClassPlugin: pluginConfigSchema,
+      }
+    });
+
+    this.serverless.configSchemaHandler.defineFunctionProperties("aws", {
+      type: 'object',
+      properties: {
+        logClassPlugin: pluginConfigSchema,
       },
     });
 
@@ -54,8 +69,9 @@ class InfrequentLogsPlugin {
 
     Object.keys(this.serverless.service.functions || {}).forEach(functionName => {
       const functionObject = this.serverless.service.functions[functionName];
-      
-      const functionLogClass = (functionObject.logClass || this.pluginConfig.logClass || 'STANDARD').toUpperCase();
+      const functionConfig = functionObject.logClassPlugin || {};
+
+      const functionLogClass = (functionConfig.logClass || this.pluginConfig.logClass || 'STANDARD').toUpperCase();
       
       // Use default log groups for STANDARD log class
       if (functionLogClass === 'STANDARD') {
