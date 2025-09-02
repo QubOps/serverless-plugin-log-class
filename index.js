@@ -145,9 +145,7 @@ class InfrequentLogsPlugin {
           lambdaObject.DependsOn = [lambdaObject.DependsOn, logGroupLogicalId];
         }
 
-        if (
-          lambdaObject.Properties.Role?.["Fn::GetAtt"]
-        ) {
+        if (lambdaObject.Properties.Role?.["Fn::GetAtt"]) {
           const lambdaRoleLogicalId =
             lambdaObject.Properties.Role["Fn::GetAtt"][0];
           const lambdaRoleObject = cf.Resources[lambdaRoleLogicalId];
