@@ -1,0 +1,28 @@
+service: iatest
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  logRetentionInDays: 7
+
+package:
+  excludeDevDependencies: true
+
+plugins:
+  - serverless-plugin-log-class
+
+custom:
+  logClassPlugin:
+    logClass: INFREQUENT_ACCESS
+    # Optional, will mean removing original log group and it's logs
+    # preserveLogGroup: false # default: true
+    # Optional, will remove the suffix and go back to default log group name
+    # logGroupNameSuffix: ''
+
+functions:
+  helloworld:
+    handler: helloworld.handler
+    logRetentionInDays: 14
+    # Can be overridden at function level too
+    # logClass: STANDARD
