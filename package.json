@@ -1,7 +1,7 @@
 {
   "name": "serverless-plugin-log-class",
   "version": "1.0.0",
-  "description": "Serverless Framework plugin to set S3 log class",
+  "description": "Serverless Framework plugin to set Cloudwatch log class",
   "main": "index.js",
   "scripts": {
     "lint": "biome lint",
