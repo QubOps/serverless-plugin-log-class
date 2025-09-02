@@ -1,6 +1,7 @@
 # serverless-plugin-log-class
 
 [![Serverless][ico-serverless]][link-serverless]
+[![NPM][ico-npm]][link-npm]
 [![License][ico-license]][link-license]
 
 ## Summary
@@ -85,6 +86,8 @@ default log group, you will first need to re-add the suffix and deploy to avoid
 a name clash before setting `preserveDefaultLogGroup` to `true`.
 
 [ico-license]: https://img.shields.io/badge/license-MIT-blue.svg
+[ico-npm]: https://img.shields.io/npm/v/serverless-plugin-log-class.svg
 [ico-serverless]: https://s3-us-west-2.amazonaws.com/assets.blog.serverless.com/v3-badge.svg
-[link-serverless]: https://www.serverless.com/
 [link-license]: ./blob/main/LICENSE
+[link-npm]: https://www.npmjs.com/package/serverless-plugin-log-class
+[link-serverless]: https://www.serverless.com/
