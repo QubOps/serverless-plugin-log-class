@@ -5,9 +5,9 @@
   },
   "devDependencies": {
     "serverless": "^4.18.2",
-    "serverless-plugin-log-class": "file:///home/jamie/Development/qub10/serverless-plugin-log-class"
+    "serverless-plugin-log-class": "^1.0.0"
   },
   "engines": {
-    "node": ">=18 <20"
+    "node": ">=18"
   }
 }
